@@ -1,0 +1,5 @@
+# emoji extension
+comment = 'emoji'
+default_version = '1.0'
+superuser = false
+schema = emoji
