@@ -67,6 +67,20 @@ SELECT emoji.encode('\x0123456789abcdef'::bytea);
 (1 row)
 ```
 
+Making a subtle change to the input data will not only change
+the corresponding emoji, but also the first emoji which contains a
+9-bit checksum of the data, which means it will change with 99.8%
+confidence (511/512). Notice in the example below what happens if
+the last **f** is changed to **7**.
+
+```sql
+SELECT emoji.encode('\x0123458789abcde7'::bytea);
+  encode
+----------
+ 💜😀🥺🪀🍼🖖🌌🍕
+(1 row)
+```
+
 <h3 id="api-emoji-decode"><code>emoji.decode(text)→bytea</code></h3>
 
 ```sql
@@ -74,6 +88,18 @@ SELECT emoji.decode('👦😀🥺🪀🦠🖖🌌🥚');
        decode
 --------------------
  \x0123456789abcdef
+(1 row)
+```
+
+Thanks to the first emoji containing a 9-bit checksum of the data,
+failing to properly copy/paste the entire emoji string will be
+detected upon decoding with 99.8% confidence and `NULL` will be returned.
+
+```sql
+SELECT emoji.decode('👦😀🥺🪀🦠🖖🌌');
+ decode
+--------
+
 (1 row)
 ```
 
