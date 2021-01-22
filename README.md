@@ -1,6 +1,9 @@
 <h1 id="top">😍🐘<code>pg-emoji</code></h1>
 
 1. [About](#about)
+1. [Dependencies](#dependencies)
+1. [Installation](#installation)
+1. [Usage](#usage)
 1. [API](#api)
       1. [emoji.encode(bytea)→text]
       1. [emoji.decode(text)→bytea]
@@ -29,7 +32,30 @@ If the checksum is invalid during decode, `NULL` is returned.
 
 [PostgreSQL]: https://www.postgresql.org/
 
-<h2 id="api">3. API</h2>
+<h2 id="dependencies">2. Dependencies</h2>
+
+None.
+
+<h2 id="installation">3. Installation</h2>
+
+Install the `emoji` extension with:
+
+    $ git clone https://github.com/truthly/pg-emoji.git
+    $ cd pg-emoji
+    $ make
+    $ sudo make install
+    $ make installcheck
+
+<h2 id="usage">4. Usage</h2>
+
+Use with:
+
+    $ psql
+    # CREATE EXTENSION emoji;
+    CREATE EXTENSION;
+
+
+<h2 id="api">5. API</h2>
 
 <h3 id="api-emoji-encode"><code>emoji.encode(bytea)→text</code></h3>
 
